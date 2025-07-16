@@ -1,8 +1,8 @@
-# 🛠 Build and Run MITRE ATT&CK Navigator in Docker (Test + Prod)
+# 🛠 Build and Run MITRE ATT&CK Navigator in Docker (Dev + Prod)
 
 This guide sets up two environments for the [MITRE ATT&CK Navigator](https://github.com/mitre-attack/attack-navigator):  
-- A **test environment** for live development with Angular’s dev server  
-- A **production build** served by Nginx using static files
+- A **dev environment** for live development with Angular’s dev server  
+- A **(not working) production build** served by Nginx using static files
 
 ---
 
@@ -15,7 +15,7 @@ cd attack-navigator
 
 ---
 
-## 🧪 Build the Test Environment
+## 🧪 Build the Dev Environment
 
 ```bash
 cp Dockerfile Dockerfile-dev
