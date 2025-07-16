@@ -2,7 +2,7 @@
 
 This guide sets up two environments for the [MITRE ATT&CK Navigator](https://github.com/mitre-attack/attack-navigator):  
 - A **dev environment** for live development with Angular’s dev server  
-- A **(not working) production build** served by Nginx using static files
+- A **production build** served by Nginx using static files
 
 ---
 
