@@ -18,10 +18,10 @@ cd attack-navigator
 ## 🧪 Build the Test Environment
 
 ```bash
-cp Dockerfile Dockerfile-test
+cp Dockerfile Dockerfile-dev
 ```
 
-### ✏️ Modify `Dockerfile-test`
+### ✏️ Modify `Dockerfile-dev`
 
 Change the last line to:
 
@@ -43,13 +43,13 @@ Change it to:
 "start": "ng serve --host 0.0.0.0 --disable-host-check"
 ```
 
-### 🧰 Create `docker-compose-test.yml`
+### 🧰 Create `docker-compose-dev.yml`
 
 ```yaml
-# docker-compose-test.yml
+# docker-compose-dev.yml
 services:
   attnav:
-    image: attnav:test
+    image: attnav:dev
     ports:
       - "4200:4200"
     container_name: attnav-dev
@@ -59,8 +59,8 @@ services:
 ### 🔧 Build & Run
 
 ```bash
-docker build -f Dockerfile-test -t attnav:test .
-docker compose -f docker-compose-test.yml up
+docker build -f Dockerfile-dev -t attnav:dev .
+docker compose -f docker-compose-dev.yml up
 ```
 
 ---
@@ -140,7 +140,7 @@ docker compose up -d && docker compose logs -f
 
 ## ✅ Notes
 
-* Use `docker-compose-test.yml` for development (port `4200`)
+* Use `docker-compose-dev.yml` for development (port `4200`)
 * Use `docker-compose.yml` for production (port `80`)
 * Static site served securely by Nginx
 * Includes basic HTTP security headers
