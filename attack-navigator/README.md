@@ -96,12 +96,16 @@ CMD ["nginx", "-g", "daemon off;"]
 ### ⚙️ `nginx.conf`
 
 ```nginx
-# nginx.conf
+#nginx.conf
 events {}
 
 http {
+  include       mime.types;
+  default_type  application/octet-stream;
+
   server {
     listen 80;
+    server_name localhost;
 
     root /usr/share/nginx/html;
     index index.html;
@@ -110,9 +114,11 @@ http {
       try_files $uri $uri/ /index.html;
     }
 
+    # Optional: strong security headers
     add_header X-Frame-Options "DENY";
     add_header X-Content-Type-Options "nosniff";
     add_header Referrer-Policy "no-referrer";
+    add_header X-XSS-Protection "1; mode=block";
   }
 }
 ```
