@@ -1,0 +1,12 @@
+services:
+  nginx-frontend:
+    build: .
+    container_name: nginx-landing
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./index.html:/usr/share/nginx/html/index.html:ro
+      - ./threat-hunting.png:/usr/share/nginx/html/threat-hunting.png:ro
+    restart: unless-stopped
+
