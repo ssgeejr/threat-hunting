@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Threat Hunting Landing Page</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 2rem;
+      background-color: #f9f9f9;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background-color: #eee;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧰 Threat Hunting Tools – Dockerized Environments</h1>
+  <p><strong>Note:</strong> This project is brand new and under active development. It will take some time to get every tool configured and documented.</p>
+
+  <h2>System Diagram</h2>
+  <img src="threat-hunting.png" alt="Threat Hunting System Diagram" style="width:50%; height:auto;" />
+
+
+  <h2>Dockerized Tools</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Tool</th>
+        <th>Source</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="/appnav">ATT&CK Navigator</a></td>
+        <td>MITRE</td>
+        <td>Visualize and map threat actor techniques</td>
+      </tr>
+      <tr>
+        <td>attack-navigatorAttrib</td>
+        <td>dlm225</td>
+        <td>Augmented version of ATT&CK Navigator</td>
+      </tr>
+      <tr>
+        <td>DeTTECT</td>
+        <td>Rabobank CDC</td>
+        <td>Threat detection coverage and audit planning</td>
+      </tr>
+      <tr>
+        <td>Dettectinator</td>
+        <td>Sirius Security</td>
+        <td>Simplifies DeTTECT mapping and validation</td>
+      </tr>
+      <tr>
+        <td>NetBox (Dockerized)</td>
+        <td>NetBox Community</td>
+        <td>Infrastructure resource modeling and inventory</td>
+      </tr>
+      <tr>
+        <td>Security Onion</td>
+        <td>Security Onion Team</td>
+        <td>Full-stack network security monitoring distro</td>
+      </tr>
+      <tr>
+        <td>Arkime</td>
+        <td>Arkime Project</td>
+        <td>Packet capture and indexing system</td>
+      </tr>
+      <tr>
+        <td>Malcolm</td>
+        <td>CISA</td>
+        <td>Network traffic analysis and threat visibility platform</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
+
