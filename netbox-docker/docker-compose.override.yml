@@ -1,0 +1,15 @@
+services:
+  netbox:
+    container_name: netbox
+    ports:
+      - 8000:8080
+  netbox-worker:
+    container_name: netbox-worker
+  netbox-housekeeping:
+    container_name: netbox-housekeeping
+  postgres:
+    container_name: netbox-postgres
+  redis:
+    container_name: netbox-redis
+  redis-cache:
+    container_name: netbox-redis-cache

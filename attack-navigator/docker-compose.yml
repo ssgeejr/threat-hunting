@@ -1,0 +1,7 @@
+services:
+  attnav:
+    image: attnav:prod
+    container_name: attnav-prod
+    ports:
+      - "80:80"
+    restart: unless-stopped

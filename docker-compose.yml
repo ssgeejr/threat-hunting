@@ -1,0 +1,119 @@
+services:
+  nginx-frontend:
+    build: .
+    container_name: nginx-landing
+    ports:
+      - "80:80"
+    volumes:
+      - nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/index.html:/usr/share/nginx/html/index.html:ro
+      - ./nginx/threat-hunting.png:/usr/share/nginx/html/threat-hunting.png:ro
+    restart: unless-stopped
+
+  attnav-prod:
+    image: attnav:prod
+    container_name: attnav-prod
+    expose:
+      - "80"
+    restart: unless-stopped
+
+  netbox:
+    container_name: netbox
+    image: netbox:prod
+    depends_on:
+      - postgres
+      - redis
+      - redis-cache
+    env_file: env/netbox.env
+    user: "unit:root"
+    healthcheck:
+      test: curl -f http://localhost:8080/login/ || exit 1
+      start_period: 90s
+      timeout: 3s
+      interval: 15s
+    volumes:
+      - ./netbox-docker/netbox-docker/configuration:/etc/netbox/config:z,ro
+      - netbox-media-files:/opt/netbox/netbox/media:rw
+      - netbox-reports-files:/opt/netbox/netbox/reports:rw
+      - netbox-scripts-files:/opt/netbox/netbox/scripts:rw
+
+  netbox-worker:
+    container_name: netbox-worker
+    image: netbox:prod
+    depends_on:
+      netbox:
+        condition: service_healthy
+    command:
+      - /opt/netbox/venv/bin/python
+      - /opt/netbox/netbox/manage.py
+      - rqworker
+    healthcheck:
+      test: ps -aux | grep -v grep | grep -q rqworker || exit 1
+      start_period: 20s
+      timeout: 3s
+      interval: 15s
+
+  netbox-housekeeping:
+    container_name: netbox-housekeeping
+    image: netbox:prod
+    depends_on:
+      netbox:
+        condition: service_healthy
+    command:
+      - /opt/netbox/housekeeping.sh
+    healthcheck:
+      test: ps -aux | grep -v grep | grep -q housekeeping || exit 1
+      start_period: 20s
+      timeout: 3s
+      interval: 15s
+
+  postgres:
+    container_name: netbox-postgres
+    image: postgres:17-alpine
+    healthcheck:
+      test: pg_isready -q -t 2 -d $$POSTGRES_DB -U $$POSTGRES_USER
+      start_period: 20s
+      timeout: 30s
+      interval: 10s
+      retries: 5
+    env_file: env/postgres.env
+    volumes:
+      - netbox-postgres-data:/var/lib/postgresql/data
+
+  redis:
+    container_name: netbox-redis
+    image: valkey/valkey:8.1-alpine
+    command:
+      - sh
+      - -c
+      - valkey-server --appendonly yes --requirepass $$REDIS_PASSWORD
+    healthcheck: &redis-healthcheck
+      test: '[ $$(valkey-cli --pass "$${REDIS_PASSWORD}" ping) = ''PONG'' ]'
+      start_period: 5s
+      timeout: 3s
+      interval: 1s
+      retries: 5
+    env_file: env/redis.env
+    volumes:
+      - netbox-redis-data:/data
+
+  redis-cache:
+    container_name: netbox-redis-cache
+    image: valkey/valkey:8.1-alpine
+    command:
+      - sh
+      - -c
+      - valkey-server --requirepass $$REDIS_PASSWORD
+    healthcheck: *redis-healthcheck
+    env_file: env/redis-cache.env
+    volumes:
+      - netbox-redis-cache-data:/data
+
+volumes:
+  netbox-media-files:
+  netbox-postgres-data:
+  netbox-redis-cache-data:
+  netbox-redis-data:
+  netbox-reports-files:
+  netbox-scripts-files:
+
