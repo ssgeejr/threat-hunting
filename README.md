@@ -30,14 +30,28 @@ Security tooling is often fragmented, outdated, or tied to difficult install ins
 
 | Tool                                                                        | Source              | Description                                    |
 | --------------------------------------------------------------------------- | ------------------- | ---------------------------------------------- |
-| [ATT&CK Navigator](https://github.com/mitre-attack/attack-navigator.git)    | MITRE               | Visualize and map threat actor techniques      |
-| [attack-navigatorAttrib](https://github.com/dlm225/attack-navigatorAttrib)  | dlm225              | Augmented version of ATT&CK Navigator          |
-| [DeTTECT](https://github.com/rabobank-cdc/DeTTECT)                          | Rabobank CDC        | Threat detection coverage and audit planning   |
-| [Dettectinator](https://github.com/siriussecurity/dettectinator/)           | Sirius Security     | Simplifies DeTTECT mapping and validation      |
-| [NetBox (Dockerized)](https://github.com/netbox-community/netbox-docker)    | NetBox Community    | Infrastructure resource modeling and inventory |
-| [Security Onion](https://github.com/Security-Onion-Solutions/securityonion) | Security Onion Team | Full-stack network security monitoring distro  |
+| ✅ [ATT&CK Navigator](https://github.com/mitre-attack/attack-navigator.git)    | MITRE               | Visualize and map threat actor techniques      |
+| ⚠️ [attack-navigatorAttrib](https://github.com/dlm225/attack-navigatorAttrib)  | dlm225              | Augmented version of ATT&CK Navigator          |
+| ⚠️ [DeTTECT](https://github.com/rabobank-cdc/DeTTECT)                          | Rabobank CDC        | Threat detection coverage and audit planning   |
+| ⚠️ [Dettectinator](https://github.com/siriussecurity/dettectinator/)           | Sirius Security     | Simplifies DeTTECT mapping and validation      |
+| ✅ [NetBox (Dockerized)](https://github.com/netbox-community/netbox-docker)    | NetBox Community    | Infrastructure resource modeling and inventory |
+| ⚠️ [Security Onion](https://github.com/Security-Onion-Solutions/securityonion) | Security Onion Team | Full-stack network security monitoring distro  |
+| ⚠️ [Arkime](https://github.com/arkime/arkime)                                  | Arkime Project      | Packet capture and indexing system             |
+| ⚠️ [Malcolm](https://github.com/idaholab/Malcolm)                              | CISA                | Network traffic analysis and threat visibility platform |
 
-> ✅ Each of these includes a dedicated setup guide in this repo’s subfolders, with Docker build and run instructions.
+---
+
+## 🌐 Toward a Unified Threat Hunting Ecosystem (Phase II)
+
+In **Phase II**, this project will expand to provide an end-to-end threat hunting ecosystem. The vision is to deliver a **fully containerized, integrated environment** where all components — from traffic collection and SIEM pipelines to ATT&CK visualizations and asset inventories — operate together cohesively. This will empower blue teams, SOCs, and defenders to:
+
+- Deploy entire threat hunting stacks in minutes
+- Correlate detections, visualize posture, and track coverage gaps
+- Build repeatable, portable labs for adversary emulation and training
+
+This phase will focus on orchestration, pre-wired data flows, and ecosystem-level documentation.
+
+![Threat Hunting Ecosystem](threat-hunting.png)
 
 ---
 
@@ -53,20 +67,6 @@ These tools are essential for threat hunting and packet analysis, but are **not 
 - [Wireshark](https://www.wireshark.org/) – GUI packet analysis tool
 
 > 📦 Installation instructions can be found at each tool's official site or GitHub repo.
-
----
-
-## 🕵️ SIEM Platforms (Reference Only)
-
-These SIEMs are **not containerized in this repo** but are listed here for reference:
-
-- [Malcolm](https://malcolm.fyi/) – Open network traffic analysis platform by CISA
-- [OSSIM](https://github.com/ossimlabs/ossim) – SIEM platform by AlienVault
-- [Arkime](https://arkime.com/) – Full packet capture and indexing system
-- [Wazuh](https://wazuh.com/) – Elastic-based SIEM/EDR platform
-- [Elastic Security](https://www.elastic.co/security) – Free SIEM tier with Kibana + ML
-
-> 📝 Future versions of this repo may include reference configs or dashboards for these SIEMs.
 
 ---
 
@@ -96,5 +96,4 @@ This repository:
 ## 🧑‍💻 Contributions Welcome
 
 Have a tool you’ve containerized? Want to improve the security posture of one of the setups? Submit a PR or open an issue!
-
 
