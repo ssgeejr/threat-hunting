@@ -1,11 +1,10 @@
 services:
   nginx-frontend:
-    build: .
-    container_name: nginx-landing
+    image: nginx-landing      
     ports:
       - "80:80"
     volumes:
-      - nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/index.html:/usr/share/nginx/html/index.html:ro
       - ./nginx/threat-hunting.png:/usr/share/nginx/html/threat-hunting.png:ro
     restart: unless-stopped
@@ -24,7 +23,7 @@ services:
       - postgres
       - redis
       - redis-cache
-    env_file: env/netbox.env
+    env_file: ./netbox-docker/netbox-docker/env/netbox.env
     user: "unit:root"
     healthcheck:
       test: curl -f http://localhost:8080/login/ || exit 1
@@ -76,7 +75,7 @@ services:
       timeout: 30s
       interval: 10s
       retries: 5
-    env_file: env/postgres.env
+    env_file: ./netbox-docker/netbox-docker/env/postgres.env
     volumes:
       - netbox-postgres-data:/var/lib/postgresql/data
 
@@ -93,7 +92,7 @@ services:
       timeout: 3s
       interval: 1s
       retries: 5
-    env_file: env/redis.env
+    env_file: ./netbox-docker/netbox-docker/env/redis.env
     volumes:
       - netbox-redis-data:/data
 
@@ -105,7 +104,7 @@ services:
       - -c
       - valkey-server --requirepass $$REDIS_PASSWORD
     healthcheck: *redis-healthcheck
-    env_file: env/redis-cache.env
+    env_file: ./netbox-docker/netbox-docker/env/redis-cache.env
     volumes:
       - netbox-redis-cache-data:/data
 
